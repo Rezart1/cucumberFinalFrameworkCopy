@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
         "json:target/cucumber.json"},
         features="src/test/resources/ui_features",
         glue="ui_automation",
-        //tags={"@regression"},
+        tags={"@regression"},
         dryRun = false,
         monochrome = true
 )
