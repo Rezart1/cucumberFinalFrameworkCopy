@@ -19,18 +19,25 @@ public class OhrmHomePage {
     }
     @FindBy(id = "welcome")
     public WebElement welcomeMessage;
+
     @FindBy(xpath = "//div[@class='menu']//b")
     public List<WebElement> tabs;
+
     @FindBy(id  = "menu_pim_viewPimModule")
     public WebElement pimTab;
+
     @FindBy(id = "menu_admin_UserManagement")
     public WebElement userManagementSubTab;
+
     @FindBy(id = "menu_admin_Job")
     public WebElement jobSubTab;
+
     @FindBy(id = "menu_admin_viewSystemUsers")
     public WebElement usersSubTab;
+
     @FindBy(css = ".head>h1")
     public WebElement systemUsersPageHeader;
+
 
     public void clickOnTabByName(String tabName){
         LOGGER.info("Attempting to click on the tab: " + tabName);
@@ -52,6 +59,21 @@ public class OhrmHomePage {
         }
         LOGGER.error("No tab found with name: " + tabName);
         throw new NoSuchElementException("No such tab name as '" + tabName + "'");
+    }
+
+
+    // Locate all tabs as a list
+    // This will give us the ability to access the list whenever we need at once
+    @FindBy(css = ".menu li>a.firstLevelMenu")
+    public List<WebElement> allTabs;
+
+    public WebElement getTabByName(String tabName){
+        for(WebElement tab : allTabs){
+            if(tab.getText().equalsIgnoreCase(tabName)){
+                return tab;
+            }
+        }
+        throw new NoSuchElementException("The tab with such content does not exist " + tabName);
     }
 
 }

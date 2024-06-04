@@ -45,8 +45,8 @@ public class BrowserFactory {
                 String dirPath = Paths.get(basePath, "src", "test", "resources", "test_data").toString();
                 chromePrefs.put("download.default_directory", dirPath);
                 ChromeOptions options = new ChromeOptions();
-                options.addArguments("--ignore-ssl-errors=yes");
-                options.addArguments("--ignore-certificate-errors");
+//                options.addArguments("--ignore-ssl-errors=yes");
+//                options.addArguments("--ignore-certificate-errors");
                 options.setExperimentalOption("prefs", chromePrefs);
                 driver = new ChromeDriver(options);
                 LOGGER.info("ChromeDriver setup complete with options: " + options.toString());

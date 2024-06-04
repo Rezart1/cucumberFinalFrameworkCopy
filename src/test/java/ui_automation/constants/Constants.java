@@ -1,7 +1,9 @@
 package ui_automation.constants;
 
 public interface Constants {
+
     String UI_CONFIG = "ui-config.properties";
+    String HEROKU_APP_URL = "herokuapp.url";
     String USER_DIRECTORY = "user.dir";
     String MEALB_DB_URL = "mb.database.url";
     String MEALB_DB_USERNAME = "mb.database.username";
@@ -9,6 +11,5 @@ public interface Constants {
     String MEALB_DB_DRIVER = "mb.database.driver";
     String OHRM_URL = "yollhrm.url";
     String GRID_URL = "grid.url";
-
 
 }

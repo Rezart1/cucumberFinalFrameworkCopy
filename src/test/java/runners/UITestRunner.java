@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
         "json:target/cucumber.json"},
         features="src/test/resources/ui_features",
         glue="ui_automation",
-        //tags={"@regression"},
+        tags={"@upload-download"}, // in selenium 4 -> @regression and not @wip
         dryRun = false,
         monochrome = true
 )
