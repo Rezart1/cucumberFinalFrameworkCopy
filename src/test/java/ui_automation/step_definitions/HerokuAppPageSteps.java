@@ -117,7 +117,6 @@ public class HerokuAppPageSteps {
         logger.info("The file is present at: " + filePath);
     }
 
-
     @Then("the file content matches the {string}")
     public void the_file_content_matches_the_expected_file(String expectedFileName) {
         String basePath = System.getProperty(Constants.USER_DIRECTORY);
@@ -132,6 +131,5 @@ public class HerokuAppPageSteps {
         logger.info("The file successfully deleted.");
 
     }
-
 
 }
