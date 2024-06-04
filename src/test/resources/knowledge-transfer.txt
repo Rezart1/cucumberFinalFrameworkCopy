@@ -1,0 +1,86 @@
+-----------------------------------------------------------------------------------------
+THIS FILE WILL CONTAIN KNOWLEDGE TRANSFER(SHARING WITH INFORMATION)
+KT - KNOWLEDGE TRANSFER is a common meeting for people who are new to the project and need to get started
+-----------------------------------------------------------------------------------------
+A. Explain in which case we use scenario outline and in which case we use the table?
+
+    1A. Scenario Outline should have an Example table. This example table will have multiple sets of data.
+    - We use Scenario Outline where we want to run a scenario from the perspective of multiple users that will use different sets of data.
+    - The data that is in Example Table can be used across all Scenario.
+    - The intention is that you run the same Scenario with multiple sets of data
+    - A hint to recognize if a case is good for Scenario Outline would: if you can split your scenario outline in individual scenarios it is a good case
+
+    2A. Data Table - when we have to provide data to our step in a dynamic way we could use parameters.
+    - Parameters can be used to pass data from steps to java methods.
+    - These parameters are usually a short data that can be a string number etc...
+    - The question is what do we do when we need to pass some data to one step that is much more complex.
+    - We use data table when our parameter becomes too complex to pass as a string or number
+    - For example if you pass some registration info about a user
+    -- If passing as a string we will have to apply some sort of separation
+    -- Also, each time we will have to read and understand the data to be able to interact with it
+    -- That's why we form a data table that will be our more complex parameter for current step
+    -- Then we can structure the data in more readable way as a List, Map, List of Maps
+
+-----------------------------------------------------------------------------------------
+
+B. Question is regarding repetitive steps in scenarios.
+- Let's say we have 3 user stories and a couple of the steps in those stories are similar.
+- What is the best way of executing those stories:
+  -- a. extend the classes where we have the steps
+  -- b. dump them to the steps that we already have, like accumulating them in one go as we did with ohrm home page or user login steps?
+
+1B. The whole idea of cucumber when it comes to steps that they are reusable.
+   - That's why we have parametrization
+   - Data Tables
+   - Scenario Outline
+   - The idea is to make our steps as reusable as possible
+   - When you write a scenario in an existing framework one of the golden rules will be stay DRY! - Do not Repeat Yourself!
+   - Remember that when cucumber looks for a step definition it won't look in a specific class but glue package (the one mentioned in test runner)
+   - When cucumber checks that package it scans all classes and identifies if the step is already defined or not
+-----------------------------------------------------------------------------------------
+
+C. ENUMS vs Config files
+- ENUM is nothing than a Constant wrapped in a specific type
+- Config is an external file that contains configs/settings/hosts/endpoints
+
+- If we talk about base URL - it is more common to place in config files
+- Endpoints are a candidate to be stored in any form - as constant or configuration
+- Names of pages, magic numbers, tabs, etc... best stored in Constants
+
+-----------------------------------------------------------------------------------------
+
+D. Uploading Files and Downloading Files
+- The web applications sometimes might have the functionality to upload a file to it
+- Some cases(common) will have that functionality done with html as input tag - we will handle with Selenium
+
+- Some other cases there will be more complex upload strategies - you need to open OS native window, you drag and drop the file from your computer
+  - - Robot AWT class that comes as a Java API  can handle(automate) keystrokes and mouse actions on OS native level
+  - - It will not be covered ion our sessions because it is outside of the scope
+
+  1. Uploading a file with selenium:
+  - Locate the input tag that will receive the file
+  - use the element located and sendKeys() with file path to upload the file
+  -- make sure your path to the file is dynamic with System.getProperty("user.dir")
+  -- make sure the path uses appropriate file separators based on your OS - use Paths.get()
+
+  2. Downloading a file
+  - To change the download directory we do it at setup level when the driver is initialized
+    In our case it is ion BrowserFactory
+    -- create a map
+    -- put the key as "download.default_directory" and value as path of your desired directory
+    --- to get dynamically the path use above-mentioned strategies
+    -- add this map to ChromeOptions object as options.setExperimentalOptions("prefs", map)
+    -- add this ChromeOptions object to the driver instance constructor
+       new ChromeDriver(options);
+  - Next simply click on downloadable link or file or button.
+  - After, we have different way to verify the file
+
+  -----------------------------------------------------------------------------------------
+
+Logging - we can utilize different logging frameworks - Log4J, Self4J, Custom, Apache
+  Levels of logs:
+  - Debug - something that you want to include in your setup, tear down logic
+    the debug logs are intended to help you debug an issue and the point is we place it in some code logics that resolve the framework
+  - Info - these logs are for information purposes, we want to include them in you step definitions to keep the track of the execution
+  - Warn - warning of an issue
+
