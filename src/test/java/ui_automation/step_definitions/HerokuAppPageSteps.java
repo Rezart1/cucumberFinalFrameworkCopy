@@ -40,24 +40,15 @@ public class HerokuAppPageSteps {
 
     @When("user uploads a file called {string}")
     public void user_uploads_a_file_called(String fileName) {
-        this.uploadFileName = fileName;
-        // To upload a file to an input tag we will use sendKeys() and we will provide the path of the file
-        String basePath;
 
+        this.uploadFileName = fileName;
         // Path of the file
         // When you work with files and want to upload them you will need the whole path of it
         // 1. This path is not reliable - it will work only on my PC, if pushing this code to GitHub you will get an error when running the same scenario
         // To fix this issue we will utilize the Java System.getProperty() method
-        // String basePath = System.getProperty(Constants.USER_DIRECTORY);
-        if (System.getenv("JENKINS_HOME") != null) {
-            // Adjust the base path for Jenkins environment
-            basePath = System.getenv("WORKSPACE");
-            logger.info("WORKSPACE: " + basePath);
-        } else {
-            // Local environment
-            basePath = System.getProperty("user.dir");
-            logger.info("user.dir: " + basePath);
-        }
+         String basePath = System.getProperty(Constants.USER_DIRECTORY);
+         logger.info("user.dir: " + basePath);
+
         // String filePath = basePath + "/src/test/resources/test_data/person.png";
         // Path for widows - \src\test\resources
         // \n, \t, \p, \", \\ - sequence chars
